@@ -1,66 +1,58 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable react/jsx-no-comment-textnodes */
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../App.css';
 
 const StaffDashboard = () => {
   const navigate = useNavigate();
-  const [userList, setUserList] = useState([]);
+  const [combinedData, setCombinedData] = useState([]);
 
   const handleLogout = () => {
     localStorage.removeItem('accessToken');
     navigate('/login');
   };
 
-  const downloadResume = async (userId) => {
+  const fetchCombinedData = async () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
       try {
-        const response = await fetch(`http://localhost:8003/history/downloadResume/${userId}`, {
+        const usersResponse = await fetch('http://localhost:8003/auth/get_all_students', {
+          method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
-  
-        if (response.ok) {
-          const blob = await response.blob();
-          const url = window.URL.createObjectURL(new Blob([blob]));
-          const a = document.createElement('a');
-          a.href = url;
-          a.download = 'resume.pdf'; // Set the appropriate file name
-          a.click();
-          window.URL.revokeObjectURL(url);
-        } else {
-          console.error('Error downloading resume');
-        }
-      } catch (error) {
-        console.error('Error downloading resume:', error);
-      }
-    } else {
-      console.warn('No access token available.');
-    }
-  };
 
-  const fetchUserList = async () => {
-    const token = localStorage.getItem('accessToken');
-    if (token) {
-      try {
-        const response = await fetch('http://localhost:8003/auth/get_all_students', {
+        const historyResponse = await fetch('http://localhost:8003/history/uploadHistory', {
           method: 'GET',
           headers: {
+            'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
           },
         });
 
-        if (response.ok) {
-          const data = await response.json();
-          setUserList(data.data);
+        if (usersResponse.ok && historyResponse.ok) {
+          const usersData = await usersResponse.json();
+          const historyData = await historyResponse.json();
+
+          const combinedDataArray = usersData.data.map(user => {
+            const historyItem = historyData.data.find(item => item.userId === user._id);
+            return {
+              name: user.name,
+              email: user.email,
+              phoneNo: user.phoneNo,
+              uploadDate: historyItem ? historyItem.uploadDate : '',
+              viewUrl: historyItem ? historyItem.viewUrl : '',
+              downloadUrl: historyItem ? historyItem.downloadUrl : '',
+            };
+          });
+
+          setCombinedData(combinedDataArray);
         } else {
-          console.error('Error fetching user list');
+          console.error('Error fetching data');
         }
       } catch (error) {
-        console.error('Error fetching user list:', error);
+        console.error('Error fetching data:', error);
       }
     } else {
       console.warn('No access token available.');
@@ -68,10 +60,8 @@ const StaffDashboard = () => {
   };
 
   useEffect(() => {
-    fetchUserList();
+    fetchCombinedData();
   }, []);
-
-  console.log("USER LIST", userList)
 
   return (
     <div className='staff-dashboard'>
@@ -79,7 +69,7 @@ const StaffDashboard = () => {
       <button className='logout-button' onClick={handleLogout}>Logout</button>
       
       <div className='user-list'>
-        {userList.map((user, index) => (
+        {combinedData.map((user, index) => (
           <div key={index} className='user-item'>
             <div className='user-details'>
               <p>Name: {user.name}</p>
@@ -88,15 +78,16 @@ const StaffDashboard = () => {
             </div>
             <div className='resume-details'>
               <p>Resume Uploaded: {user.uploadDate}</p>
-             <a
+              <a
                 href='#'
                 onClick={(e) => {
                   e.preventDefault();
-                  downloadResume(user.userId);
+                  // Handle view resume here
                 }}
               >
-              View Resume</a>
-              <a href={user.downloadUrl} download>Download Resume</a>
+                View Resume
+              </a>
+              <a href={user.downloadUrl} download={user.downloadUrl}>Download Resume</a>
             </div>
           </div>
         ))}
@@ -106,3 +97,4 @@ const StaffDashboard = () => {
 };
 
 export default StaffDashboard;
+

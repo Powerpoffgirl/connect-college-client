@@ -28,7 +28,7 @@ const StudentDashboard = () => {
 
     if (token) {
       try {
-        const response = await fetch('http://localhost:8003/auth/updateUser', {
+        const response = await fetch('https://connect-college-server.onrender.com/auth/updateUser', {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`,

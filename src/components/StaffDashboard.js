@@ -16,14 +16,14 @@ const StaffDashboard = () => {
     const token = localStorage.getItem('accessToken');
     if (token) {
       try {
-        const usersResponse = await fetch('http://localhost:8003/auth/get_all_students', {
+        const usersResponse = await fetch('https://connect-college-server.onrender.com/auth/get_all_students', {
           method: 'GET',
           headers: {
             Authorization: `Bearer ${token}`,
           },
         });
 
-        const historyResponse = await fetch('http://localhost:8003/history/uploadHistory', {
+        const historyResponse = await fetch('https://connect-college-server.onrender.com/history/uploadHistory', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

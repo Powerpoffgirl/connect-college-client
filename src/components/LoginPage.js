@@ -20,7 +20,7 @@ const LoginPage = () => {
 
     try {
       console.log("EMAIL< PASSWORD, TYPE", email, password, userType)
-        const response = await fetch('http://localhost:8003/login', {
+        const response = await fetch('https://connect-college-server.onrender.com/login', {
         // mode:'no-cors', 
         method: 'POST',
         headers: {

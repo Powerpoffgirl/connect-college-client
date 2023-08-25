@@ -23,7 +23,7 @@ const RegisterPage = () => {
     console.log("USER DATA", userData)
     try {
       // Send a POST request to the registration API
-      const response = await fetch('http://localhost:8003/register', {
+      const response = await fetch('https://connect-college-server.onrender.com/register', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

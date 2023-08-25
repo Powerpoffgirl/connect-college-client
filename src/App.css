@@ -1,38 +1,241 @@
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+/* Reset margin and padding for the body element */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
   }
+  
+  /* Create a flex container to center the form */
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Set the container to full viewport height */
+    background-color: #f0f0f0; /* Add a background color */
+  }
+  
+  .registration-form {
+    width: 400px;
+    padding: 20px;
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .registration-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  /* Add spacing to input labels and fields */
+  .registration-form label {
+    display: block;
+    margin-bottom: 8px; /* Add margin below each label */
+  }
+  
+  .registration-form input {
+    width: 95%;
+    padding: 8px;
+    margin-bottom: 16px; /* Add margin below each input field */
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  /* Arrange radio buttons in a row */
+  .registration-form .radio-group {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+  
+  .registration-form label.radio-label {
+    margin-right: 10px;
+  }
+  
+  .registration-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .registration-form button:hover {
+    background-color: #0056b3;
+  }
+  .student-dashboard {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    background-color: #f5f5f5;
+    text-align: center;
+  }
+  
+  .user-details {
+    margin-bottom: 20px;
+  }
+  
+  .formContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 20px; /* Add margin at the top of the formContainer */
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+    width: 100%; /* Set width to 100% for consistent width of form elements */
+  }
+  
+  .logout-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .logout-button:hover {
+    background-color: #0056b3;
+  }
+  
+
+  .container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f5f5f5;
+  }
+  
+  .login-form {
+    width: 400px;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .login-form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  .form-group input {
+    width: 95%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  
+  .radio-group {
+    margin-bottom: 15px;
+  }
+  
+  .radio-label {
+    margin-right: 10px;
+  }
+  
+  .login-form button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-form button:hover {
+    background-color: #0056b3;
+  }
+  
+  .login-form p {
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .login-form a {
+    color: #007bff;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  
+  .login-form a:hover {
+    text-decoration: underline;
+  }
+  
+
+  /* StaffDashboard.css */
+.staff-dashboard {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.logout-button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 10px;
+}
+
+.logout-button:hover {
+  background-color: #0056b3;
+}
+
+.user-list {
+  margin-top: 20px;
+}
+
+.user-item {
+  border: 1px solid #ccc;
+  padding: 10px;
+  margin-bottom: 10px;
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  justify-content: space-between;
 }
 
-.App-link {
-  color: #61dafb;
+.user-details {
+  flex: 1;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.resume-details {
+  flex: 1;
+  text-align: right;
+}
+
+.resume-details a {
+  color: #007bff;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.resume-details a:hover {
+  color: #0056b3;
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const RegisterPage = () => {
   const navigate = useNavigate();
@@ -107,6 +107,9 @@ const RegisterPage = () => {
 
         <button type="submit">Register</button>
       </form>
+        <p>
+          Already registered? <Link to='/login'>Click here to login</Link>
+        </p>
     </div>
     </div>
   );
